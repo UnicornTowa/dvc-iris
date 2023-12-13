@@ -51,13 +51,13 @@ stages:
     params:
     - common
     - catboost
-#  finalyze:
-#    cmd: papermill finalyze.ipynb outputs/finalyze_out.ipynb
-#    deps:
-#      - outputs/metrics_cb.yaml
-#      - outputs/metrics_lr.yaml
-#    outs:
-#      - result.csv
+  finalyze:
+    cmd: papermill finalyze.ipynb outputs/finalyze_out.ipynb
+    deps:
+      - outputs/metrics_cb.yaml
+      - outputs/metrics_lr.yaml
+    outs:
+      - outputs/result.csv
       
 plots:
   - outputs/test_classes_cb.csv:
@@ -70,4 +70,10 @@ plots:
       x: actual_class
       y: predicted_class
       title: Confusion Matrix LR
+  - outputs/results.csv:
+      template: bar_horizontal
+      x: Accuracy
+      y: Model
+      title: Histogram of Predictions
+
 

@@ -1,4 +1,4 @@
 accuracy lr: 1.0
 f1 lr: 1.0
-presicion lr: 1.0
+precision lr: 1.0
 recall lr: 1.0

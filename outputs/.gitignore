@@ -1,0 +1,7 @@
+/model_lr.pckl
+/model_cb.pckl
+/test_classes_cb.csv
+/train_classes_cb.csv
+/test_classes_lr.csv
+/train_classes_lr.csv
+/result.csv
