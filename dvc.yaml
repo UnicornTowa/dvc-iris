@@ -1,0 +1,73 @@
+stages:
+  prepare:
+    cmd:
+      papermill prepare.ipynb outputs/prepare_out.ipynb
+    outs:
+      - data.csv
+  logistic_regression:
+    cmd: papermill 
+     logistic_regression.ipynb 
+     outputs/logistic_regression_out.ipynb
+     -p SEED ${common.seed}
+     -p DATA ${common.data}
+     -p TEST_SIZE ${common.test_size} 
+     -p PENALTY ${logistic_regression.penalty}
+     -p C ${logistic_regression.c}
+     -p MULTI_CLASS ${logistic_regression.multi_class}
+    deps:
+      - data.csv
+    outs:
+      - outputs/model_lr.pckl
+      - outputs/test_classes_lr.csv
+      - outputs/train_classes_lr.csv
+    metrics:
+      - outputs/metrics_lr.yaml:
+          cache: false
+    params:
+    - common
+    - logistic_regression
+          
+  catboost:
+    cmd: papermill
+     catboost.ipynb 
+     outputs/catboost_out.ipynb
+     -p SEED ${common.seed}
+     -p DATA ${common.data}
+     -p TEST_SIZE ${common.test_size}
+     -p ITERATIONS ${catboost.iterations}
+     -p LEARNING_RATE ${catboost.learning_rate}
+     -p L2_LEAF_REG ${catboost.l2_leaf_reg}
+     -p EARLY_STOPPING_ROUNDS ${catboost.early_stopping_rounds}
+     -p DEPTH ${catboost.depth}
+    deps:
+      - data.csv
+    outs:
+      - outputs/model_cb.pckl
+      - outputs/test_classes_cb.csv
+      - outputs/train_classes_cb.csv
+    metrics:
+      - outputs/metrics_cb.yaml:
+          cache: false
+    params:
+    - common
+    - catboost
+#  finalyze:
+#    cmd: papermill finalyze.ipynb outputs/finalyze_out.ipynb
+#    deps:
+#      - outputs/metrics_cb.yaml
+#      - outputs/metrics_lr.yaml
+#    outs:
+#      - result.csv
+      
+plots:
+  - outputs/test_classes_cb.csv:
+      template: confusion
+      x: actual_class
+      y: predicted_class
+      title: Confusion Matrix CatBoost
+  - outputs/test_classes_lr.csv:
+      template: confusion
+      x: actual_class
+      y: predicted_class
+      title: Confusion Matrix LR
+
