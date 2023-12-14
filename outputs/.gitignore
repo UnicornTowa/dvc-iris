@@ -5,3 +5,7 @@
 /test_classes_lr.csv
 /train_classes_lr.csv
 /result.csv
+/Accuracy.csv
+/Precision.csv
+/Recall.csv
+/F1.csv

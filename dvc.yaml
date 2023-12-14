@@ -58,6 +58,10 @@ stages:
       - outputs/metrics_lr.yaml
     outs:
       - outputs/result.csv
+      - outputs/Accuracy.csv
+      - outputs/Precision.csv
+      - outputs/Recall.csv
+      - outputs/F1.csv
       
 plots:
   - outputs/test_classes_cb.csv:
@@ -70,10 +74,21 @@ plots:
       x: actual_class
       y: predicted_class
       title: Confusion Matrix LR
-  - outputs/results.csv:
+  - outputs/Accuracy.csv:
       template: bar_horizontal
       x: Accuracy
       y: Model
-      title: Histogram of Predictions
+  - outputs/Precision.csv:
+      template: bar_horizontal
+      x: Precision
+      y: Model
+  - outputs/Recall.csv:
+      template: bar_horizontal
+      x: Recall
+      y: Model
+  - outputs/F1.csv:
+      template: bar_horizontal
+      x: F1
+      y: Model
 
 
