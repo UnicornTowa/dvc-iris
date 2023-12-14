@@ -1,0 +1,16 @@
+common:
+  seed: 666
+  data: data.csv
+  test_size: 0.93
+
+logistic_regression:
+  penalty: l2
+  c: 1.0
+  multi_class: multinomial
+
+catboost:
+  iterations: 1000
+  early_stopping_rounds: 200
+  l2_leaf_reg: 50
+  depth: 5
+  learning_rate: 0.05
